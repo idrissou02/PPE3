@@ -10,7 +10,7 @@ use Doctrine\ORM\Mapping as ORM;
 class Artiste
 {
     #[ORM\Id]
-    #[ORM\GeneratedValue(strategy:"NONE")]
+    #[ORM\GeneratedValue]
     #[ORM\Column]
     private ?int $id = null;
 
@@ -89,12 +89,12 @@ class Artiste
         return $this;
     }
 
-    public function getTpe(): ?string
+    public function getType(): ?string
     {
         return $this->tpe;
     }
 
-    public function setTpe(string $tpe): static
+    public function setType(string $tpe): static
     {
         $this->tpe = $tpe;
 

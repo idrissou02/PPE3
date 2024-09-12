@@ -13,11 +13,11 @@ class AppFixtures extends Fixture
     {
         $faker=Factory::create("fr_FR");
         
-        $ficheierArtisteCsv=fopen(__DIR__."/artiste.csv","r");
+        $fichierArtisteCsv=fopen(__DIR__."/artiste.csv","r");
         while (!feof($fichierArtisteCsv)){
-            $lesArtiste[]=fgetcsv($fichierArtisteCsv);
+            $lesArtistes[]=fgetcsv($fichierArtisteCsv);
         }
-        flose($fichierArtisteCsv);
+        fclose($fichierArtisteCsv);
 
     $genres=["men","women"];
         foreach ($lesArtistes as $value) {
@@ -28,7 +28,7 @@ class AppFixtures extends Fixture
                         ->setSite($faker->url())
                         ->setImage('https://randomuser.me/api/portails/'.$faker->randomElement($genres)."/".mt_rand(1,99).".jpg")
                         ->setType($value[2]);
-                        $maneger->persist($artiste);
+            $manager->persist($artiste);
         }
         $manager->flush();
     }
