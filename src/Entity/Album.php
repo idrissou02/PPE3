@@ -2,10 +2,12 @@
 
 namespace App\Entity;
 
-use App\Repository\AlbumRepository;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
+use App\Entity\Artiste;
+use App\Entity\Morceau;
 use Doctrine\ORM\Mapping as ORM;
+use App\Repository\AlbumRepository;
+use Doctrine\Common\Collections\Collection;
+use Doctrine\Common\Collections\ArrayCollection;
 
 #[ORM\Entity(repositoryClass: AlbumRepository::class)]
 class Album
@@ -24,12 +26,12 @@ class Album
     #[ORM\Column(length: 255)]
     private ?string $image = null;
 
-    #[ORM\ManyToOne]
-    #[ORM\JoinColumn(nullable: false)]
-    private ?Artiste $artiste = null;
-
     #[ORM\OneToMany(targetEntity: Morceau::class, mappedBy: 'album')]
     private Collection $morceau;
+
+    #[ORM\ManyToOne(inversedBy: 'albums')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?Artiste $artiste = null;
 
     public function __construct()
     {
@@ -84,17 +86,6 @@ class Album
         return $this;
     }
 
-    public function getArtiste(): ?Artiste
-    {
-        return $this->artiste;
-    }
-
-    public function setArtiste(?Artiste $artiste): static
-    {
-        $this->artiste = $artiste;
-
-        return $this;
-    }
 
     /**
      * @return Collection<int, Morceau>
@@ -122,6 +113,18 @@ class Album
                 $morceau->setAlbum(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getArtiste(): ?Artiste
+    {
+        return $this->artiste;
+    }
+
+    public function setArtiste(?Artiste $artiste): static
+    {
+        $this->artiste = $artiste;
 
         return $this;
     }
