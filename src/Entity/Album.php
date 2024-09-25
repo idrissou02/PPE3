@@ -33,9 +33,13 @@ class Album
     #[ORM\JoinColumn(nullable: false)]
     private ?Artiste $artiste = null;
 
+    #[ORM\ManyToMany(targetEntity: Style::class, mappedBy: 'albums')]
+    private Collection $styles;
+
     public function __construct()
     {
         $this->morceau = new ArrayCollection();
+        $this->styles = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -125,6 +129,33 @@ class Album
     public function setArtiste(?Artiste $artiste): static
     {
         $this->artiste = $artiste;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Style>
+     */
+    public function getStyles(): Collection
+    {
+        return $this->styles;
+    }
+
+    public function addStyle(Style $style): static
+    {
+        if (!$this->styles->contains($style)) {
+            $this->styles->add($style);
+            $style->addAlbum($this);
+        }
+
+        return $this;
+    }
+
+    public function removeStyle(Style $style): static
+    {
+        if ($this->styles->removeElement($style)) {
+            $style->removeAlbum($this);
+        }
 
         return $this;
     }

@@ -6,15 +6,14 @@
 <h1 class="pt-2 text-center">Liste des artistes</h1>
 <hr>
 <div class="row pt-2">
-{% for leArtiste in lesArtistes %} 
-<div class="col-sm-12 col-md-4 col-lg-4 col-xl-3">
+{% for leArtiste in lesArtistes %}    
     {% set nbAlbums = leArtiste.albums|length %}
-   
+    <div class="col-sm-12 col-md-12 col-lg-4 col-xl-4">
         <div class="card mb-3">
-            <h3 class="card-header">{{leArtiste.nom}}</h3>
+            <h3 class="card-header"> <a href="{{path('ficheArtiste', {'id': leArtiste.id})}}">{{leArtiste.nom}}</a></h3>
             <div class="card-body">
             <h5 class="card-title">
-                <a href="" class="badge badge-success" ></a>{{nbAlbums}}{% if nbAlbums > 1 %} albums {% else %} album {% endif %} 
+                <a href="" class="badge badge-success" >{{nbAlbums}}{% if nbAlbums > 1 %} albums {% else %} album {% endif %}</a> 
                 </h5>
             </div>
             <img class="avatar mx-auto d-block" src="{{leArtiste.image}}"></img>
