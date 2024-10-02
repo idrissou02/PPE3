@@ -31,20 +31,24 @@
 <table class="table table-hover mx-auto">
   <thead>
     <tr>
-      <th scope="col-3"><font style="vertical-align: inherit;">Photo</font></th>
-      <th scope="col-4"><font style="vertical-align: inherit;">No</font></font></th>
-      <th scope="col-1"><font style="vertical-align: inherit;">Date</font></th>
-      <th scope="col-3"><font style="vertical-align: inherit;">Styles</font></th>
-      <th scope="col-1"><font style="vertical-align: inherit;">Morceaux</font></th>
+      <th scope="col-3">Photo</th>
+      <th scope="col-4">Nom</th>
+      <th scope="col-1">Date</th>
+      <th scope="col-3">Styles</th>
+      <th scope="col-1">Morceaux</th>
     </tr>
   </thead>
   <tbody>
   {% for leAlbum in leArtiste.albums %}
         <tr class="table-active">
             <td><img class= "miniature"src="{{leAlbum.image}}" alt=""></td>
-            <td scope="row">{{leAlbum.nom}}</td>
+            <td scope="row"> <a href="{{path('ficheAlbum', {'id': leAlbum.id})}}">{{leAlbum.nom}}</a></td>
             <td>{{leAlbum.date}}</td>
-            <td></td>
+            <td>
+                {% for leStyle in leAlbum.styles %}
+                    <span class="badge" style="background-color: {{leStyle.couleur}};">{{leStyle.nom}}</span>
+                {% endfor %}
+            </td>
             <td>{{leAlbum.morceau|length}}</td>
         </tr>
   {% endfor %}

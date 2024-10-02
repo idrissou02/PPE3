@@ -25,9 +25,14 @@
                     <span class="badge" style="background-color:{{leStyle.couleur}};"> {{leStyle.nom}}</span>
                 {% endfor %}
                 </li>
-                {% set nb = leAlbum.morceau|length %}
                 <li class="list-group-item">
-                {{nb}} {% if nb>1 %} moeceaux {% else %} morceau {% endif %}
+                {% set nb = leAlbum.morceau|length %}
+                {{nb}} 
+                {% if nb>1 %} 
+                moeceaux 
+                {% else %} 
+                morceau 
+                {% endif %}
                 </li>
             </ul>
         </div>
