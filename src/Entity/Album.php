@@ -13,7 +13,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 class Album
 {
     #[ORM\Id]
-    #[ORM\GeneratedValue]
+    #[ORM\GeneratedValue(strategy:"IDENTITY")]
     #[ORM\Column]
     private ?int $id = null;
 
