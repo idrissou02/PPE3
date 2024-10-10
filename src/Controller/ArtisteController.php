@@ -10,24 +10,20 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class ArtisteController extends AbstractController
 {
-    #[Route('/admin/artistes', name: 'admin_artistes', methods:"GET")]
-    public function listeArtistes(ArtisteRepository $repo, PaginatorInterface $paginator, Request $request): Response
+    #[Route('/artistes', name: 'artistes', methods: 'GET')]
+    public function ListeArtistes(ArtisteRepository $repo)
     {
-        $artistes=$paginator->paginate(
-        $repo->listeArtistesCompletePaginee(),
-        $request->query->getInt('page', 1), /*page number*/
-        9 /*limit per page*/
-        );
+        $artistes=$repo->listeArtistesComplete();
         return $this->render('artiste/listeArtistes.html.twig', [
-            'lesArtistes' => $artistes,
+        'lesArtistes' => $artistes
         ]);
     }
 
-    #[Route('/artistes/{id}', name: 'ficheArtiste', methods:"GET")]
-    public function ficheArtiste(Artiste $artiste): Response
+    #[Route("/artiste/{id}", name: 'ficheArtiste', methods: 'GET')]
+    public function FicheArtiste(Artiste $artiste)
     {
         return $this->render('artiste/ficheArtiste.html.twig', [
-            'leArtiste' => $artiste,
+        'LeArtiste' => $artiste
         ]);
     }
 }

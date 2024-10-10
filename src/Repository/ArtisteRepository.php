@@ -30,8 +30,19 @@ class ArtisteRepository extends ServiceEntityRepository
         return $this->createQueryBuilder('art')
             ->select('art','a')
             ->innerJoin('art.albums','a')
-            ->orderBy('a.id', 'ASC')
             ->getQuery()
+        ;
+    }
+        /**
+     * @return Artiste[] an array of Artiste objects
+     */
+    public function listeArtistesComplete()
+    {
+        return $this->createQueryBuilder('art')
+            ->select('art','a')
+            ->innerJoin('art.albums','a')
+            ->getQuery()
+            ->getResult()
         ;
     }
 

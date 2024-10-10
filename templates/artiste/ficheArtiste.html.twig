@@ -6,11 +6,11 @@
 <h1 class="pt-2 text-center">Fiche de l'artiste</h1>
 <hr>
 <div class="row pt-2">
-    {% set nbAlbums = leArtiste.albums|length %}
-            <h3 class="card-header">{{leArtiste.nom}}</h3>
+    {% set nbAlbums = LeArtiste.albums|length %}
+            <h3 class="card-header">{{LeArtiste.nom}}</h3>
             <div class="row">
                 <div class="col-3 d-flex align-items-center mx-auto">
-                    <img class="avatar mx-auto d-block" src="{{leArtiste.image}}"></img>
+                    <img class="avatar mx-auto d-block" src="{{LeArtiste.image}}"></img>
                 </div>
                 <div class="col">
                     <div class="card-body">
@@ -19,11 +19,11 @@
                         </h5>
                     </div>
                     <div class="card-body">
-                        <p class="card-text">{{leArtiste.description|raw}}</p>
+                        <p class="card-text">{{LeArtiste.description|raw}}</p>
                     </div>
                     <ul class="list-group list-group-flush">
-                        <li class="list-group-item">{% if leArtiste.type == 0 %} Artiste solo {% else %} Groupe{% endif %}</li>
-                        <li class="list-group-item"><a href="{{leArtiste.site}}">son site web</a></li> 
+                        <li class="list-group-item">{% if LeArtiste.type == 0 %} Artiste solo {% else %} Groupe{% endif %}</li>
+                        <li class="list-group-item"><a href="{{LeArtiste.site}}">son site web</a></li> 
                     </ul>
                 </div>
             </div>
@@ -39,7 +39,7 @@
     </tr>
   </thead>
   <tbody>
-  {% for leAlbum in leArtiste.albums %}
+  {% for leAlbum in LeArtiste.albums %}
         <tr class="table-active">
             <td><img class= "miniature"src="{{leAlbum.image}}" alt=""></td>
             <td scope="row"> <a href="{{path('ficheAlbum', {'id': leAlbum.id})}}">{{leAlbum.nom}}</a></td>
