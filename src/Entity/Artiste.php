@@ -31,7 +31,7 @@ class Artiste
     private ?string $image = null;
 
     #[ORM\Column(length: 255)]
-    private ?string $tpe = null;
+    private ?string $type = null;
 
     #[ORM\OneToMany(targetEntity: Album::class, mappedBy: 'artiste')]
     private Collection $albums;
@@ -103,12 +103,12 @@ class Artiste
 
     public function getType(): ?string
     {
-        return $this->tpe;
+        return $this->type;
     }
 
-    public function setType(string $tpe): static
+    public function setType(string $type): static
     {
-        $this->tpe = $tpe;
+        $this->type = $type;
 
         return $this;
     }
